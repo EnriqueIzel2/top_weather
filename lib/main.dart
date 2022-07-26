@@ -70,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _search() {
-    _dataService.getWeather(_cityTextController.text);
+  void _search() async {
+    final response = await _dataService.getWeather(_cityTextController.text);
+    print(response.cityName);
   }
 }
