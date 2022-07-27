@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Column(
               children: [
-                Image(image: NetworkImage(_response?.iconUrl)),
+                // Image(image: NetworkImage(_response?.iconUrl)),
                 Text(
                   '${_response?.tempInfo?.temperature}°',
                   style: TextStyle(fontSize: 40),
