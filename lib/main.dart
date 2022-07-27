@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:top_weather/models.dart';
 
 import 'data_service.dart';
 
@@ -34,6 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final _cityTextController = TextEditingController();
   final _dataService = DataService();
 
+  WeatherResponse? _response;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,13 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "cityName",
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            Text(
-              '°',
-              style: Theme.of(context).textTheme.headline4,
+            Column(
+              children: [
+                Image(image: NetworkImage(_response?.iconUrl)),
+                Text(
+                  '${_response?.tempInfo?.temperature}°',
+                  style: TextStyle(fontSize: 40),
+                ),
+                Text('${_response?.weatherInfo?.description}')
+              ],
             ),
             SizedBox(
               width: 150,
@@ -72,6 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _search() async {
     final response = await _dataService.getWeather(_cityTextController.text);
-    print(response.cityName);
+    setState(() => _response = response);
   }
 }
